@@ -1,12 +1,16 @@
 name: Create Docker Image CI
-on: push
+on: [push]
 
 jobs:
   my_build:
-runs-on: ubuntu-latest
-steps:
-  - name: checkout code
-    uses: actions/checkout@v4.1.1
-  - name: Build the Docker image
-    run: docker build . --file dockerfile --tag my-image-name:$(date +%s)
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Build the Docker image
+        run: docker build . --file dockerfile --tag my-image-name:$(date +%s)
+
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
