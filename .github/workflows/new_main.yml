@@ -7,10 +7,9 @@ on:
 
 jobs:
   my_build:
-
- runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4.1.1
-    - name: Build the Docker image
-    - run: docker build . --file dockerfile --tag my-image-name:$(date +%s)
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4.1.1
+     - name: Build the Docker image
+     - run: docker build . --file dockerfile --tag my-image-name:$(date +%s)
 
