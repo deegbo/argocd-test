@@ -9,6 +9,10 @@ jobs:
         uses: actions/checkout@v4.1.1
       - name: Build the Docker image
         run: docker build . --file src/dockerfile --tag my-image-name:$(date +%s)
+
+     - name: Check for the docker image
+       run: docker images
+  
   build2:
     runs-on: ubuntu-latest
     steps:
