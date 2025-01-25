@@ -5,7 +5,7 @@ env:
   REGISTRY: 'ghcr.io/deegbo/argocd-test'
   IMAGE_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.sha) }}
   USERNAME: ${{ secrets.USERNAME }}
-  DOCKER_TOKEN: ${{ secret.GITOPS_PAT_TOKEN }}
+  DOCKER_TOKEN: ${{ secrets.GITOPS_PAT_TOKEN }}
 
 
 jobs:
