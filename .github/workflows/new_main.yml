@@ -6,11 +6,18 @@ env:
   #IMAGE_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.sha) }}
   #USERNAME: ${{ secrets.USERNAME }}
   DOCKER_TOKEN: ${{ secrets.GITOPS_PAT_TOKEN }}
-
+  # permissions:
+  #   contents: read
+  #   packages: write
+  #   attestations: write
+  #   id-token: write
 
 jobs:
   my_build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: checkout code
         uses: actions/checkout@v4.1.1
