@@ -1,6 +1,13 @@
 name: Create Docker Image CI
 on: [push]
 
+env:
+  REGISTRY: 'ghcr.io/deegbo/argocd-test'
+  IMAGE_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.sha) }}
+  USERNAME: ${{ secrets.USERNAME }}
+  DOCKER_TOKEN: ${{ env.GITOPS_PAT_TOKEN }}
+
+
 jobs:
   my_build:
     runs-on: ubuntu-latest
@@ -9,7 +16,7 @@ jobs:
         uses: actions/checkout@v4.1.1
 
       - name: Log in to GHCR
-        run: echo "${{ secrets.GITOPS_PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo  $DOCKER_TOKEN | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build the Docker image
         run: |
