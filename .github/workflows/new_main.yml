@@ -7,8 +7,15 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v4.1.1
+
+        name: Log in to GHCR
+        run: echo "${{ secrets.GITOPS_PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Build the Docker image
-        run: docker build . --file src/dockerfile --tag my-image-name:$(date +%s)
+        run: |
+          #docker build . --file src/dockerfile --tag my-image-name:$(date +%s)
+          docker build . --file src/dockerfile --tag ghcr.io/${{ github.actor }}/argocd-test:latest
+          docker push ghcr.io/${{ github.actor }}/argocd-test:latest
 
       - name: Check for the docker image
         run: docker images
